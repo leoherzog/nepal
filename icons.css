@@ -1,0 +1,62 @@
+@font-face {
+  font-family: 'nepal';
+  src:
+    url('fonts/nepal.ttf?wxclx5') format('truetype'),
+    url('fonts/nepal.woff?wxclx5') format('woff'),
+    url('fonts/nepal.svg?wxclx5#nepal') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'nepal' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-nepal:before {
+  content: "\1f3f3";
+}
+.icon-square:before {
+  content: "\1f4b2";
+}
+.icon-periscope:before {
+  content: "\1f3a5";
+}
+.icon-venmo:before {
+  content: "\1f4b8";
+}
+.icon-engedi:before {
+  content: "\26ea";
+}
+.icon-email:before {
+  content: "\1f4e7";
+}
+.icon-facebook:before {
+  content: "\1f465";
+}
+.icon-twitter:before {
+  content: "\1f426";
+}
+.icon-anchor:before {
+  content: "\2693";
+}
+.icon-instagram:before {
+  content: "\1f4f8";
+}
+.icon-paypal:before {
+  content: "\1f3e6";
+}
+.icon-google-wallet:before {
+  content: "\1f45b";
+}
+

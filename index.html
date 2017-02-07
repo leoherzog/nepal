@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Megan and Leo Go to Nepal. February 2017.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>Nepal | Megan and Leo Herzog</title>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.11/moment-timezone-with-data-2010-2020.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Acme">
+  <link rel="stylesheet" href="icons.css" />
+
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <style>
+    section {
+      padding-top: 2vh;
+      padding-bottom: 4vh;
+    }
+
+    a, a:hover {
+      color: #444444;
+    }
+
+    .jumbotron {
+      background-image: url('https://ssl.gstatic.com/atari/images/impression-header.png');
+      background-repeat: no-repeat;
+      background-color: #3A3A3A;
+      background-position: center;
+      width: 100%
+    }
+
+    .jumbotron h1 {
+      color: #FFFFFF;
+      font-family: 'Acme', sans-serif;
+      font-size: 6em;
+    }
+
+    .jumbotron h5 {
+      color: #FFFFFF;
+    }
+
+    h2, h3, h4 {
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    #homeClock, #nepalClock {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .hero-circle {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto;
+      position: relative;
+      border: 8px solid black;
+      border-radius: 50%;
+    }
+
+    .hero-face {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-face:after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      background: black;
+      border-radius: 6px;
+      content: "";
+      display: block;
+    }
+
+    .hero-hour {
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -4px 0 -4px -25%;
+      padding: 4px 0 4px 25%;
+      background: black;
+      -webkit-transform-origin: 100% 50%;
+      -ms-transform-origin: 100% 50%;
+      transform-origin: 100% 50%;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .hero-minute {
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -40% -3px 0;
+      padding: 40% 3px 0;
+      background: black;
+      -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .hero-second {
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -40% -1px 0 0;
+      padding: 40% 1px 0;
+      background: #FF0000;
+      -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+    }
+
+    .label-default {
+      background-color: #000000;
+    }
+
+    #rightNow {
+      background-image: url('meganandleo.jpg');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      height: 58vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #rightNowTextBox {
+      margin-top: 20vw;
+      background-color: rgba(255,255,255,0.75);
+      padding: 2vw;
+    }
+
+    #description, #donate {
+      background-color: #EEEEEE;
+    }
+
+    #meganTwitter, #leoTwitter {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    #footer {
+      padding: 0px;
+      margin: 0px;
+    }
+  </style>
+
+  <script>
+    $(function() {
+
+      function updateHomeClock() {
+        var now = moment(),
+          second = now.seconds() * 6,
+          minute = now.minutes() * 6 + second / 60,
+          hour = ((now.hours() % 12) / 12) * 360 + 90 + minute / 12;
+
+        $('#homeHour').css("transform", "rotate(" + hour + "deg)");
+        $('#homeMinute').css("transform", "rotate(" + minute + "deg)");
+        $('#homeSecond').css("transform", "rotate(" + second + "deg)");
+        $('#homeDigitalClock').html(now.format('h:mm:ss a on dddd, MMMM Do'));
+      }
+
+      function updateNepalClock() {
+        var now = moment().tz('Asia/Kathmandu'),
+          second = now.seconds() * 6,
+          minute = now.minutes() * 6 + second / 60,
+          hour = ((now.hours() % 12) / 12) * 360 + 90 + minute / 12;
+
+        $('#nepalHour').css("transform", "rotate(" + hour + "deg)");
+        $('#nepalMinute').css("transform", "rotate(" + minute + "deg)");
+        $('#nepalSecond').css("transform", "rotate(" + second + "deg)");
+        $('#nepalDigitalClock').html(now.format('h:mm:ss a on dddd, MMMM Do'));
+      }
+
+      function timedUpdate() {
+        updateHomeClock();
+        updateNepalClock();
+        setTimeout(timedUpdate, 1000);
+      }
+
+      timedUpdate();
+    });
+
+    function updateRightNow(rightNow) {
+      $('#rightNowString').html('<span class="text-primary">' + rightNow + '</span>');
+    }
+
+
+  </script>
+</head>
+
+<body>
+
+  <div class="jumbotron text-center">
+    <h1>Megan and Leo<br />Go to Nepal <i class="icon-nepal"></i></h1>
+    <h5>February 2017</h5>
+  </div>
+
+  <section id="clocks">
+    <div class="container text-center">
+      <div id="homeClock" class="col-xs-12 col-sm-5 panel panel-default">
+        <div class="panel-heading"><h4>Your Time</h4></div>
+        <div class="panel-body">
+          <div class="hero-circle">
+            <div class="hero-face">
+              <div id="homeHour" class="hero-hour"></div>
+              <div id="homeMinute" class="hero-minute"></div>
+              <div id="homeSecond" class="hero-second"></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer"><span id="homeDigitalClock"></span></div>
+      </div>
+      <div class="col-sm-2"></div>
+      <div id="nepalClock" class="col-xs-12 col-sm-5 panel panel-default">
+        <div class="panel-heading"><h4>Time in Kathmandu</h4></div>
+        <div class="panel-body">
+          <div class="hero-circle">
+            <div class="hero-face">
+            <div id="nepalHour" class="hero-hour"></div>
+            <div id="nepalMinute" class="hero-minute"></div>
+            <div id="nepalSecond" class="hero-second"></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer"><span id="nepalDigitalClock"></span></div>
+    </div>
+  </section>
+
+  <section id="rightNow" class="text-center">
+    <div id="rightNowTextBox">
+        <h3>Right Now, Megan and Leo are:<br />
+        <span id="rightNowString"><span class="text-muted">Fetching latest update...</span></span></h3>
+    </div>
+  </section>
+
+  <section id="updates">
+    <div class="container text-center">
+      <h2 class="text-center">Live Updates</h2>
+      <p>&nbsp;</p>
+      <h4>Live Streaming <a href="https://periscope.tv/xd1936" target="_blank"><i class="icon-periscope"></i></a></h4>
+      <p>Hopefully, we'll be able to do some Live Streaming on Periscope while we're over there!<br />If we go live, the button below will turn red. Click it to tune in, or to follow Leo to be notified if we go live!</p>
+      <p><a href="https://www.periscope.tv/xd1936" class="periscope-on-air" data-size="large">@xd1936</a></p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <div id="row">
+        <div id="meganTwitter" class="col-xs-12 col-sm-5 panel panel-primary">
+          <div class="box">
+            <div id="panel-heading">
+              <h4>Megan's Twitter <i class="icon-twitter"></i></h4></div>
+            <div id="panel-body"><a class="twitter-timeline" data-chrome="noheader nofooter noscrollbar" data-tweet-limit="3" data-height="600" data-link-color="#2196f3" data-aria-polite="assertive" href="https://twitter.com/Skinz3417">Tweets by Skinz3417</a></div>
+          </div>
+        </div>
+        <div class="col-sm-2"></div>
+        <div id="leoTwitter" class="col-xs-12 col-sm-5 panel panel-primary">
+          <div class="box">
+            <div id="panel-heading">
+              <h4>Leo's Twitter <i class="icon-twitter"></i></h4></div>
+            <div id="panel-body"><a class="twitter-timeline" data-chrome="noheader nofooter noscrollbar" data-tweet-limit="3" data-height="600" data-link-color="#2196f3" data-aria-polite="assertive" href="https://twitter.com/xd1936">Tweets by xd1936</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="description">
+    <div class="container">
+      <h2 class="text-center">The Story</h2>
+      <p>&nbsp;</p>
+      <h4>We're going to Nepal!</h4>
+      <p>Leo and I have been attending <a href="//engedichurch.com/" target="_blank">Engedi Church</a> for about 5 years now. Mission work has been at the heart of the church since its’ beginning, and it has been something that we have intentionally been
+        getting more involved with recently. While on an Engedi mission trip to Nepal last April, I (Megan) befriended the one-and-only other girl on the adventure, Erika. During our time there, it became extremely clear that she was to sell her things
+        and move to Nepal. As she prepared to leave, Erika asked me and Leo to be her U.S. support team and we humbly accepted.</p>
+      <p>Erika is working for an organization called <a href="//beautyforashesnepal.com/pages/who-we-are" target="_blank">Beauty for Ashes Nepal</a> (BFAN). BFAN is a business with a mission to employ marginalized women at risk for being exploited, as well
+        as women rescued from the sex-industry, and share with them the love of Jesus. In Nepal, jobs for women are extremely limited, especially for women who have been exploited in the sex-industry. BFAN trains these vulnerable women how to sew and/or
+        create jewelry, which BFAN then sells to other organizations or exports to Western countries. The women are then employed at a livable-wage with a retirement account, medical reimbursement, and scholarships for their children to go to school.
+        Through business, the women are able to provide for their families with dignity!
+      </p>
+      <p>As we have been corresponding with Erika over the past few months while she has been transitioning to life in Nepal, it has become clear that BFAN could use some help with the technology side of the business. Many of their computer programs and
+        practices are out of date or not working, so we have been asked to come help! <strong>We will be going for two weeks, leaving on February 14th</strong>. Leo will be taking care of the technology needs, and I will be assisting with physical needs
+        and pouring into/encouraging Erika emotionally and spiritually.</p>
+      <p>The work being done in Nepal is something we really want to be a part of and truly feel called by God to go. In order for Leo and me to go on this trip, we need to raise $3,000. Please consider partnering with us financially by donating to our efforts.
+        Please pray and take your time considering how you can join us on this mission.</p>
+      <p>&nbsp;</p>
+      <p>With lots of love!</p>
+      <p>Megan &amp; Leo</p>
+    </div>
+  </section>
+
+  <section id="map">
+    <div class="container">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" frameborder="0" style="border:0" scrolling="no" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJv6p7MIoZ6zkR6rGN8Rt8E7U&zoom=6&key=AIzaSyDu-dFrmXZnUMqzIvVSC2_bFnYY_24uvug" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="donate">
+    <div class="container text-center">
+      <h2>Thank you for your support!</h2>
+      <p>&nbsp;</p>
+      <h5>So many of you have come together to help fund our trip.<br />We are <strong>so</strong> grateful for your prayers and financial support!</h5>
+      <p>&nbsp;</p>
+      <h5>If you are still looking for information on how to help us out, here it is:</h5>
+      <p><a href="https://engedichurch.managedmissions.com/StripeDonation/meganleoherzog1" target="_blank" class="btn btn-primary btn-lg">Make a tax-deductible donation to us through <i class="icon-engedi" alt="Engedi Church"></i></a></p>
+      <p>&nbsp;</p>
+      <h5>Other options:</h5>
+      <p>
+        <a href="https://cash.me/$leoherzog" target="_blank" class="btn btn-default"><i class="icon-square" alt="Engedi Church"></i> Square Cash</a>
+        <a href="https://www.paypal.me/leoherzog" target="_blank" class="btn btn-default"><i class="icon-paypal" alt="PayPal"></i> PayPal</a>
+        <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=xd1936@gmail.com&su=Donation+for+the+Nepal+Trip&body=(Click+the+dollar+sign+icon+in+the+toolbar+below)&tf=1" target="_blank" class="btn btn-default"><i class="icon-google-wallet" alt="Google Wallet"></i> Google Wallet</a>
+        <a href="https://venmo.com/leoherzog" target="_blank" class="btn btn-default"><i class="icon-venmo" alt="Venmo"></i> Venmo</a>
+      </p>
+    </div>
+  </section>
+
+<section id="footer">
+  <footer>
+    <div class="panel-footer text-center">
+      <p><small>&copy; <script>document.write(new Date().getFullYear())</script> Leo and Megan Herzog | Site by <a href="https://herzog.tech" target="_blank">Leo</a> | Hosted on <a href="https://github.com/xd1936/nepal" target="_blank">Github</a></small></p>
+    </div>
+  </footer>
+</section>
+
+  <script src="//script.google.com/macros/s/AKfycbyD_02Dylzbrhv1LFA4wTi6FUTIh-JVlMS2jGncsCYCeUgRtgtX/exec"></script>
+</body>
+
+</html>
